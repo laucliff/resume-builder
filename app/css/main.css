@@ -27,8 +27,10 @@ body{
 .section{
 	background-color: orange;
 	position: relative;
-	top: 100px;
-	left: 400px;
-	width: 240px;
+/*	top: 100px;
+	left: 400px;*/
+	border: 1px solid black;
+	width: 200px;
 	height: 100px;
+	padding: 10px;
 }

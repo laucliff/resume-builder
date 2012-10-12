@@ -1,7 +1,27 @@
 function AttributeManager($scope, $element){
 
-	$scope.testval = 'testval1'
 
-	$scope.cssAttr = {'width': '10'}
+	$scope.style = {
+		'background-color': 'gray'
+	}
+
+	$scope.testval = {type: 'div'}
+
+	$scope.items = [
+		{
+			style: {
+				'background-color': 'orange',
+				'width': '200px',
+				'position': 'relative',
+				'left': '100px'
+			},
+			data: '1',
+			type: 'text'
+		}
+	]
+
+	$scope.test = function(){
+		return 'asdf'
+	}
 
 }
