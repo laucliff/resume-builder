@@ -3,12 +3,18 @@ angular.module('rbDirectives',[]).directive('section', function($compile, $inter
 		restrict: 'A',
 		controller: function($scope, $element){
 			// console.log($scope, $element)
-			$scope.sectionType = function(type){
+			$scope.template = function(type){
 				switch(type){
 					case "text":
-						return 'input type="text"'
+						return '<input type="text" ng-style="style" ng-model="data">'
 						break;
-					default: return "div"
+					case "textarea":
+						return '<textarea ng-style="style" ng-model="data">'
+					case "section":
+						return '<ul ng-style="style"><li ng-repeat="item in data" ng-style="item.style"><div section="item.type" style="item.style" class="section-text" data="item.data"></div></li></ul>'
+					default: 
+						return '<div ng-style="style">{{data}}</div>'
+						
 				}
 			}
 		},
@@ -20,11 +26,15 @@ angular.module('rbDirectives',[]).directive('section', function($compile, $inter
 		// templateUrl: '/partials/section.html',
 		link: function(scope, element, attrs){
 
-			//make this a watch on section change
 
-			var type = scope.$eval($interpolate('{{section}}'))
-			var html = '<' + scope.sectionType(type) + 'ng-style="style" ng-model="data">'
-			element.replaceWith($compile(html)(scope))
+			scope.$watch('section', function(value){
+				var type = scope.section
+				var html = scope.template(type)
+				html = $compile(html)(scope)
+				element.replaceWith(html)
+				element = html
+				// element.html($compile(html)(scope))
+			})
 		}
 	}
 })
