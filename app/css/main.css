@@ -34,3 +34,7 @@ body{
 	height: 100px;
 	padding: 10px;
 }
+
+.focus{
+	border: 5px solid red !important;
+}

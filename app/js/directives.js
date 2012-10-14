@@ -1,4 +1,4 @@
-angular.module('rbDirectives',[]).directive('section', function($compile, $interpolate){
+angular.module('rbDirectives',[]).directive('section', function($compile, $rootScope){
 	return {
 		restrict: 'A',
 		controller: function($scope, $element){
@@ -6,14 +6,16 @@ angular.module('rbDirectives',[]).directive('section', function($compile, $inter
 			$scope.template = function(type){
 				switch(type){
 					case "text":
-						return '<input type="text" ng-style="style" ng-model="data">'
+						// return '<input type="text" ng-style="style" ng-model="data" ng-class="class" ng-click="getFocus()">'
+						// return '<div section-text ng-style="style" ng-model="data">{{data}}</div>'
+						return '<div ng-class="class" ng-click="getFocus()"><div ng-style="style" ng-hide="allowEdit">{{data}}</div><input type="text" ng-style="style" ng-model="data" ng-show="allowEdit"></div>'
 						break;
 					case "textarea":
-						return '<textarea ng-style="style" ng-model="data">'
+						return '<textarea ng-style="style" ng-model="data" ng-class="class" ng-click="getFocus()">'
 					case "section":
-						return '<ul ng-style="style"><li ng-repeat="item in data" ng-style="item.style"><div section="item.type" style="item.style" class="section-text" data="item.data"></div></li></ul>'
+						return '<div ui:sortable ng-model"data" ng-style="style"><li ng-repeat="item in data" ng-style="item.style"><div section="item.type" style="item.style" class="section-text" data="item.data"></div></li><//div'
 					default: 
-						return '<div ng-style="style">{{data}}</div>'
+						return '<div ng-style="style" ng-model="data">{{data}}</div>'
 						
 				}
 			}
@@ -23,21 +25,68 @@ angular.module('rbDirectives',[]).directive('section', function($compile, $inter
 			style : '=',
 			data : '=',
 		},
-		// templateUrl: '/partials/section.html',
 		link: function(scope, element, attrs){
 
+			scope.getFocus = function(){
+				$rootScope.$broadcast('dropFocus')
+				// console.log('getFocus')
+				scope.class="focus"
+				// $('.focus').removeClass('focus')
+				// $element.addClass('focus')
+				scope.allowEdit = true
+			}
+
+			scope.$on('dropFocus', function(){
+				// console.log('dropFocus', scope.data)
+				scope.class=""
+				scope.allowEdit = false
+			})
 
 			scope.$watch('section', function(value){
 				var type = scope.section
 				var html = scope.template(type)
-				html = $compile(html)(scope)
-				element.replaceWith(html)
-				element = html
-				// element.html($compile(html)(scope))
+				newElement = $compile(html)(scope)
+				element.replaceWith(newElement)
+				element = newElement
+
+
+
+				// element.bind('click', function(event){
+				// 	$('.focus').removeClass('focus')
+				// 	element.addClass('focus')
+				// 	event.stopPropagation()
+				// })
+
+
 			})
+
 		}
 	}
 })
+// .directive('contenteditable', function(){
+// 	return {
+// 		restrict: 'A',
+// 		require: '?ngModel',
+// 		link: function(scope, element, attrs, ngModel){
+// 			if(!ngModel) return;
+
+// 			ngModel.$render = function(){
+// 				element.html(ngModel.$viewValue || '')
+				
+// 			}
+
+// 			element.bind('blur keyup change', function(){
+// 				scope.$apply(read())
+// 			})
+
+
+// 			function read(){
+// 				ngModel.$setViewValue(element.html())
+// 			}
+
+// 		}
+// 	}
+// })
 
 
 // .directive('section', function(){

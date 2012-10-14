@@ -1,4 +1,12 @@
 function AttributeManager($scope, $element){
+	// $scope.class="focus"
+
+	$scope.getFocus = function(a){
+		console.log($scope.data)
+		// $scope.class="focus"
+		// $('.focus').removeClass('focus')
+		// $element.addClass('focus')
+	}
 
 
 	$scope.style = {
@@ -6,7 +14,9 @@ function AttributeManager($scope, $element){
 		'border' : '1px solid black'
 	}
 
-	$scope.testval = {type: 'div'}
+	$scope.testval = 'awedg'
+
+	$scope.data = 'parent'
 
 	$scope.items = [
 		{
@@ -48,6 +58,7 @@ function AttributeManager($scope, $element){
 	]
 
 	$scope.test = function(){
+		console.log('ctrltest')
 		return 'asdf'
 	}
 
