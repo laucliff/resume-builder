@@ -1,1 +1,1 @@
-angular.module('resume-builder',['rbDirectives', 'ui']);
+angular.module('resume-builder',['rbDirectives', 'rbServices', 'ui']);

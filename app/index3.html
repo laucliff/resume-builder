@@ -22,6 +22,8 @@
 	<script src="js/vendor/jquery-1.8.2.min.js"></script>
 	<script src="js/vendor/jquery-ui-1.9.0.js"></script>
 
+	<script src="js/vendor/underscore-min.js"></script>
+
 	<script src="js/vendor/angular.js"></script>
 
 	<script src="js/vendor/angular-ui.js"></script>
@@ -46,37 +48,29 @@
 <!-- <div ng-style="style" class="focus" >aweg</div> -->
 
 
-		<div ui:sortable ng-model="items" ng-style='style'>
-			<li ng-repeat="item in items" ng-style='item.style'>{{item.data}}<hr>
-				<!-- <input type="text" ng-model="item.type"> -->
-				<!-- <div section="item.type" data="item.data"> -->
-				<div section="item.type" style="item.style" class="section-text" data="item.data"></div>
-			</li>
-			<!-- <section ng-repeat="item in items" ng-style="item.style"></section> -->
-		</div>
+<!-- 		<div ui:sortable ng-model="items" ng-style='style'>
+			<div ng-repeat="item in items" ng-style='item.style'>{{item.data}}<hr>
+				<div section="item.type" style="item.style" data="item.data"></div>
+			</div>
+		</div> -->
 
-		{{items}}
-		<div class="span4 attribute-panel" >
-			<form class="form-horizontal">
-				<legend>CSS Attr</legend>
-				<div class="control-group">
-					<label class="control-label">background</label>
-					<div class="controls">
-						<input type="text" class="input-small" ng-model='cssAttr.width'>
-						<input type="text" class="input-small" ng-model='cssAttr.height'>
-					</div>
-				</div>
-			</form>
-			abc{{cssAttr}}
-		</div>
+		<div section="doc.type" style="doc.style" data="doc.data"></div>
 
-	<style type="text/css"> .item {border: 1px solid black;}</style>
-	<script type="text/javascript"> 
-		// console.log($('.section'))
-		// $('.sortable').sortable()
-		// $('.section').resizable().sortable()
-		// $('.ab').resizable()
-	</script>
+		{{doc}}
+<hr>
+
+	<div stylebox>
+		{{style}}
+		<div ng-repeat="attr in styleAttrs">
+			{{attr}}:<input type="text" ng-model="style[attr]">
+		</div>
+		<!-- <input type="text" ng-model="style['height']"> -->
+	</div>
+
+
+
+
+
 		
 		<!--<script src="js/vendor/bootstrap.min.js"></script> -->
 	</body>

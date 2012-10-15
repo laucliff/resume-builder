@@ -1,65 +1,72 @@
-function AttributeManager($scope, $element){
-	// $scope.class="focus"
-
-	$scope.getFocus = function(a){
-		console.log($scope.data)
-		// $scope.class="focus"
-		// $('.focus').removeClass('focus')
-		// $element.addClass('focus')
-	}
+function AttributeManager($scope, $element, $http){
 
 
-	$scope.style = {
-		'background-color': 'gray',
-		'border' : '1px solid black'
-	}
+	// $http.get('templates/prototype.json').success(function(data){
+	// 	$scope.doc = data
+	// })
+
+
 
 	$scope.testval = 'awedg'
 
-	$scope.data = 'parent'
+	$scope.allowEdit = false
 
-	$scope.items = [
-		{
-			style: {
-				'background-color': 'orange',
-				'width': '200px',
-				'position': 'relative',
-				'left': '100px'
+	$scope.doc = {
+		type: 'section',
+		style: {
+			'background-color': 'gray',
+			'border' : '1px solid black'
 			},
-			data: '1\n1',
-			type: 'textarea'
-		}
-		,{
-			style: {
-				'background-color': 'brown',
-				'width': '200px',
-				'position': 'relative',
-				'left': '100px'
-			},
-			data: '2',
-			type: 'text'
-		}
-		,{
-			style: {
-				'background-color': 'white',
-				'width': '200px',
-				'position': 'relative',
-				'left': '100px'
-			},
-			data: [{
+		data: [
+			{
 				style: {
-					'background-color': 'orangered'
+					'background-color': 'orange',
+					'width': '200px',
+					'position': 'relative',
+					'left': '100px'
 				},
-				data: '7',
+				data: '1',
 				type: 'textarea'
-			}],
-			type: 'section'
-		}
-	]
+			}
+			,{
+				style: {
+					'background-color': 'brown',
+					'font-family': '"Times New Roman"',
+					'font-size': '24px',
+					'width': '200px',
+					'position': 'relative',
+					'left': '100px'
+				},
+				data: '2',
+				type: 'text'
+			}
+			,{
+				style: {
+					'background-color': 'white',
+					'width': '200px',
+					'position': 'relative',
+					'left': '100px'
+				},
+				data: [
+					{
+						style: {
+							'background-color': 'orangered'
+						},
+						data: '7',
+						type: 'textarea'
+					},
+					{
+						style: {
+							'background-color': 'salmon'
+						},
+						data: '8',
+						type: 'text'
+					},
+				],
+				type: 'section'
+			}
+		]
 
-	$scope.test = function(){
-		console.log('ctrltest')
-		return 'asdf'
 	}
 
 }
