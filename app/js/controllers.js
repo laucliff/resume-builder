@@ -67,7 +67,7 @@ function MainCtrl($scope, $element, $http, focus, $rootScope){
 						},
 						data: '8',
 						type: 'text'
-					},
+					}
 				],
 				type: 'section'
 			}
@@ -75,17 +75,28 @@ function MainCtrl($scope, $element, $http, focus, $rootScope){
 
 	}
 
-$scope.section_class = []
-$scope.allowEdit = false
-$scope.gettingFocus = false
+	$scope.deleteChildByIndex = function(index){
+		this.doc.data.splice(index, 1)
+	}
 
-$scope.getFocus = function(){
-		event.stopPropagation()
+	$scope.deleteSection = function(){
+		if (!angular.isUndefined(this.$index)) {
+			this.gettingDeleted = true
+			this.$emit('delete', this.$index)
+		}
+	}
+
+	$scope.section_class = []
+	$scope.allowEdit = false
+	$scope.gettingFocus = false
+
+	$scope.getFocus = function(){
+		event.stopPropagation() //prevent ng-click propagation
 		focus.giveStyle(this.doc.style)
 		this.gettingFocus = true
 		$rootScope.$broadcast('newFocus')
 	}
-	
+
 	$scope.newFocus = function(){
 		if (this.gettingFocus){
 			this.section_class = _.union(this.section_class, ["focus"])
@@ -97,6 +108,8 @@ $scope.getFocus = function(){
 			this.allowEdit = false
 		}
 	}
+
+
 
 	$scope.template = function(type){
 		switch(type){
