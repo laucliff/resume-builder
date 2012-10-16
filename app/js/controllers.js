@@ -75,6 +75,8 @@ function MainCtrl($scope, $element, $http, focus, $rootScope){
 
 	}
 
+
+
 	$scope.deleteChildByIndex = function(index){
 		this.doc.data.splice(index, 1)
 	}
@@ -86,27 +88,25 @@ function MainCtrl($scope, $element, $http, focus, $rootScope){
 		}
 	}
 
+
+	// focus should be an encapsulated function like focus.requestFocus(handle)
+	// grab css from handle
+	// notify old focus holder
+	// notify stylebox to get new css
+
 	$scope.section_class = []
 	$scope.allowEdit = false
 	$scope.gettingFocus = false
 
 	$scope.getFocus = function(){
+		
 		event.stopPropagation() //prevent ng-click propagation
-		focus.giveStyle(this.doc.style)
-		this.gettingFocus = true
-		$rootScope.$broadcast('newFocus')
-	}
 
-	$scope.newFocus = function(){
-		if (this.gettingFocus){
-			this.section_class = _.union(this.section_class, ["focus"])
-			this.allowEdit = true
-			this.gettingFocus = false
-		}
-		else{
+		this.section_class = _.union(this.section_class, ["focus"])
+		focus.holdFocus(this, this.doc.style, function(){
 			this.section_class = _.without(this.section_class, "focus")
-			this.allowEdit = false
-		}
+		})
+
 	}
 
 
@@ -126,7 +126,7 @@ function MainCtrl($scope, $element, $http, focus, $rootScope){
 			case "section":
 				return '<div ui:sortable ng-model="doc.data" ng-style="doc.style" ng-class="section_class">' +
 								'<div ng-repeat="item in doc.data" ng-style="item.style" ng-controller="SectionController" ng-click="getFocus()">' +
-								// '{{section_class}}{{gettingFocus}}<hr>' +
+								'{{section_class}}{{gettingFocus}}<hr>' +
 								'<div section></div>' +
 								'</div></div>'
 			case "hr":
@@ -143,20 +143,20 @@ function MainCtrl($scope, $element, $http, focus, $rootScope){
 function SectionController($scope, $element, focus, $rootScope){
 	
 	$scope.doc = $scope.doc.data[$scope.$index]
-
 	
 
 }
 
-function styleCtrl($scope, $element, focus){
+function StyleController($scope, $element, focus){
 	$scope.styleAttrs = [
 		"background-color",
 		"border",
-		"height"
+		"left"
 	]
 
-	// $scope.$on('dropFocus', function(){
-	// 	$scope.style = focus.getStyle()
-	// })
+	focus.setStyleCB($scope, function(newStyle){
+		// console.log(this, this.style, newStyle)
+		this.style = newStyle
+	})
 
 }

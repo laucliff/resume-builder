@@ -30,9 +30,6 @@ angular.module('rbDirectives',[])
 		restrict: 'A',
 		link: function(scope, element, attrs){
 
-			scope.$on('newFocus', function(){
-				scope.style = focus.getStyle()
-			})
 
 		}
 	}
