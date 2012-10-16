@@ -96,19 +96,23 @@ function MainCtrl($scope, $element, $http, focus, $rootScope){
 
 	$scope.section_class = []
 	$scope.allowEdit = false
-	$scope.gettingFocus = false
 
 	$scope.getFocus = function(){
-		
+
 		event.stopPropagation() //prevent ng-click propagation
 
-		this.section_class = _.union(this.section_class, ["focus"])
-		focus.holdFocus(this, this.doc.style, function(){
+		focus.requestFocus(this, this.doc.style, this.addFocus, function(){
+			this.allowEdit = false
 			this.section_class = _.without(this.section_class, "focus")
 		})
 
 	}
 
+	$scope.addFocus = function(){
+		this.allowEdit = true
+		this.section_class = _.union(this.section_class, ["focus"])
+
+	}
 
 
 	$scope.template = function(type){
@@ -124,9 +128,9 @@ function MainCtrl($scope, $element, $http, focus, $rootScope){
 			case "textarea": //remove this later
 				return '<textarea ng-style="doc.style" ng-model="doc.data" ng-class="section_class" ng-click="getFocus()">'
 			case "section":
-				return '<div ui:sortable ng-model="doc.data" ng-style="doc.style" ng-class="section_class">' +
+				return '<div ui:sortable ng-model="doc.data" ng-style="doc.style" ng-class="section_class" ng-click="getFocus()">' +
 								'<div ng-repeat="item in doc.data" ng-style="item.style" ng-controller="SectionController" ng-click="getFocus()">' +
-								'{{section_class}}{{gettingFocus}}<hr>' +
+								// '{{section_class}}{{gettingFocus}}<hr>' +
 								'<div section></div>' +
 								'</div></div>'
 			case "hr":
@@ -143,7 +147,8 @@ function MainCtrl($scope, $element, $http, focus, $rootScope){
 function SectionController($scope, $element, focus, $rootScope){
 	
 	$scope.doc = $scope.doc.data[$scope.$index]
-	
+	$scope.section_class = []
+	$scope.allowEdit = false
 
 }
 
@@ -155,7 +160,6 @@ function StyleController($scope, $element, focus){
 	]
 
 	focus.setStyleCB($scope, function(newStyle){
-		// console.log(this, this.style, newStyle)
 		this.style = newStyle
 	})
 

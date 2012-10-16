@@ -7,15 +7,20 @@ angular.module('rbServices',[]).factory('focus', function(){
 			styleBox = context
 			styleCallback = callback
 		},
-		holdFocus: function(section, style, dropFocus){
+		requestFocus: function(section, style, approveFocus, dropFocus){
 			
 			//signal old focus to drop
-			if (sectionFocus) sectionCallback.call(sectionFocus)
+			if (sectionFocus){
+				sectionCallback.call(sectionFocus)
+			} 
 
 			//reassign to new focus
 			sectionFocus = section
 			sectionStyle = style
 			sectionCallback = dropFocus
+
+			//signal new focus approved
+			approveFocus.call(sectionFocus)
 
 			//signal stylebox to rebind style
 			styleCallback.call(styleBox, sectionStyle)
