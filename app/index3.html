@@ -35,43 +35,32 @@
 
 	</head>
 
-	<body ng-controller="AttributeManager">
-
-<!-- 		<div contenteditable ng-model="testval">1</div>
-		<p> 
-			<textarea ng-model="testval"></textarea>
-			{{testval}}
-		</p>
- -->
-
-<!-- <div style="background-color:orange; height:50px;" ng-class="class">aweg</div> -->
-<!-- <div ng-style="style" class="focus" >aweg</div> -->
+	<body ng-controller="MainCtrl">
 
 
-<!-- 		<div ui:sortable ng-model="items" ng-style='style'>
-			<div ng-repeat="item in items" ng-style='item.style'>{{item.data}}<hr>
-				<div section="item.type" style="item.style" data="item.data"></div>
-			</div>
-		</div> -->
-
-		<div section="doc.type" style="doc.style" data="doc.data"></div>
+		<!-- <div section="doc.type" style="doc.style" data="doc.data"></div> -->
 
 		{{doc}}
 <hr>
 
-	<div stylebox>
+	<div section></div>
+
+<!-- 	<div ui:sortable ng-model="doc.data" ng-style="doc.style">
+	<div ng-repeat="item in doc.data" ng-style="item.style" ng-controller="SectionController">
+		<div newsection></div>
+	</div>
+</div> -->
+
+
+</div>
+	<div stylebox ng-controller="styleCtrl">
 		{{style}}
 		<div ng-repeat="attr in styleAttrs">
 			{{attr}}:<input type="text" ng-model="style[attr]">
 		</div>
-		<!-- <input type="text" ng-model="style['height']"> -->
 	</div>
 
 
 
-
-
-		
-		<!--<script src="js/vendor/bootstrap.min.js"></script> -->
 	</body>
 </html>

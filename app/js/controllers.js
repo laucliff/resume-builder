@@ -1,4 +1,4 @@
-function AttributeManager($scope, $element, $http){
+function MainCtrl($scope, $element, $http, focus, $rootScope){
 
 
 	// $http.get('templates/prototype.json').success(function(data){
@@ -9,7 +9,7 @@ function AttributeManager($scope, $element, $http){
 
 	$scope.testval = 'awedg'
 
-	$scope.allowEdit = false
+	// $scope.allowEdit = false
 
 	$scope.doc = {
 		type: 'section',
@@ -27,6 +27,12 @@ function AttributeManager($scope, $element, $http){
 				},
 				data: '1',
 				type: 'textarea'
+			}
+			,{
+				type: 'hr',
+				style: {
+					'border': '1px solid black'
+				}
 			}
 			,{
 				style: {
@@ -68,5 +74,76 @@ function AttributeManager($scope, $element, $http){
 		]
 
 	}
+
+$scope.section_class = []
+$scope.allowEdit = false
+$scope.gettingFocus = false
+
+$scope.getFocus = function(){
+		event.stopPropagation()
+		focus.giveStyle(this.doc.style)
+		this.gettingFocus = true
+		$rootScope.$broadcast('newFocus')
+	}
+	
+	$scope.newFocus = function(){
+		if (this.gettingFocus){
+			this.section_class = _.union(this.section_class, ["focus"])
+			this.allowEdit = true
+			this.gettingFocus = false
+		}
+		else{
+			this.section_class = _.without(this.section_class, "focus")
+			this.allowEdit = false
+		}
+	}
+
+	$scope.template = function(type){
+		switch(type){
+			case "text":
+				return 	'' +
+								'<div ng-class="section_class" ng-click="getFocus()">' +
+								// '<div>{{allowEdit}}' +
+								'<div ng-style="doc.style" ng-hide="allowEdit">{{doc.data}}</div>' +
+								'<input aa type="text" ng-style="doc.style" ng-model="doc.data" ng-show="allowEdit">' +
+								'</div>'
+				break;
+			case "textarea": //remove this later
+				return '<textarea ng-style="doc.style" ng-model="doc.data" ng-class="section_class" ng-click="getFocus()">'
+			case "section":
+				return '<div ui:sortable ng-model="doc.data" ng-style="doc.style" ng-class="section_class">' +
+								'<div ng-repeat="item in doc.data" ng-style="item.style" ng-controller="SectionController" ng-click="getFocus()">' +
+								// '{{section_class}}{{gettingFocus}}<hr>' +
+								'<div section></div>' +
+								'</div></div>'
+			case "hr":
+				return '<hr ng-style="doc.style">'
+			default: 
+				return '<div ng-style="doc.style" ng-model="doc.data">{{doc.data}}</div>'
+				
+		}
+	}
+
+
+}
+
+function SectionController($scope, $element, focus, $rootScope){
+	
+	$scope.doc = $scope.doc.data[$scope.$index]
+
+	
+
+}
+
+function styleCtrl($scope, $element, focus){
+	$scope.styleAttrs = [
+		"background-color",
+		"border",
+		"height"
+	]
+
+	// $scope.$on('dropFocus', function(){
+	// 	$scope.style = focus.getStyle()
+	// })
 
 }
