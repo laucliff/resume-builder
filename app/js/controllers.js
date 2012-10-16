@@ -12,7 +12,7 @@ function MainCtrl($scope, $element, $http, focus, $rootScope){
 	// $scope.allowEdit = false
 
 	$scope.doc = {
-		type: 'section',
+		type: 'container',
 		style: {
 			'background-color': 'gray',
 			'border' : '1px solid black'
@@ -47,6 +47,7 @@ function MainCtrl($scope, $element, $http, focus, $rootScope){
 				type: 'text'
 			}
 			,{
+				type: 'container',
 				style: {
 					'background-color': 'white',
 					'width': '200px',
@@ -68,8 +69,7 @@ function MainCtrl($scope, $element, $http, focus, $rootScope){
 						data: '8',
 						type: 'text'
 					}
-				],
-				type: 'section'
+				]
 			}
 		]
 
@@ -127,7 +127,7 @@ function MainCtrl($scope, $element, $http, focus, $rootScope){
 				break;
 			case "textarea": //remove this later
 				return '<textarea ng-style="doc.style" ng-model="doc.data" ng-class="section_class" ng-click="getFocus()">'
-			case "section":
+			case "container":
 				return '<div ui:sortable ng-model="doc.data" ng-style="doc.style" ng-class="section_class" ng-click="getFocus()">' +
 								'<div ng-repeat="item in doc.data" ng-style="item.style" ng-controller="SectionController" ng-click="getFocus()">' +
 								// '{{section_class}}{{gettingFocus}}<hr>' +
@@ -149,6 +149,10 @@ function SectionController($scope, $element, focus, $rootScope){
 	$scope.doc = $scope.doc.data[$scope.$index]
 	$scope.section_class = []
 	$scope.allowEdit = false
+
+	// if ($scope.doc.type == "container"){
+	// 	$scope.allowEdit = false
+	// }
 
 }
 
