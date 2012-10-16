@@ -89,27 +89,29 @@ function MainCtrl($scope, $element, $http, focus, $rootScope){
 	}
 
 
-	// focus should be an encapsulated function like focus.requestFocus(handle)
-	// grab css from handle
-	// notify old focus holder
-	// notify stylebox to get new css
-
 	$scope.section_class = []
 	$scope.allowEdit = false
 
-	$scope.getFocus = function(){
 
+	$scope.toggleEdit = function(){
+		if(this.doc.type == "container"){
+			this.allowEdit = !this.allowEdit
+		}
+	}
+
+	$scope.getFocus = function(){
+		console.log(this.doc.data)
 		event.stopPropagation() //prevent ng-click propagation
 
 		focus.requestFocus(this, this.doc.style, this.addFocus, function(){
-			this.allowEdit = false
+			this.toggleEdit()
 			this.section_class = _.without(this.section_class, "focus")
 		})
 
 	}
 
 	$scope.addFocus = function(){
-		this.allowEdit = true
+		this.toggleEdit()
 		this.section_class = _.union(this.section_class, ["focus"])
 
 	}
@@ -119,18 +121,18 @@ function MainCtrl($scope, $element, $http, focus, $rootScope){
 		switch(type){
 			case "text":
 				return 	'' +
-								'<div ng-class="section_class" ng-click="getFocus()">' +
-								// '<div>{{allowEdit}}' +
+								// '<div ng-class="section_class" ng-click="getFocus()">' +
+								'<div>' +
 								'<div ng-style="doc.style" ng-hide="allowEdit">{{doc.data}}</div>' +
 								'<input aa type="text" ng-style="doc.style" ng-model="doc.data" ng-show="allowEdit">' +
 								'</div>'
 				break;
 			case "textarea": //remove this later
-				return '<textarea ng-style="doc.style" ng-model="doc.data" ng-class="section_class" ng-click="getFocus()">'
+				return '<textarea ng-style="doc.style" ng-model="doc.data">'
 			case "container":
 				return '<div ui:sortable ng-model="doc.data" ng-style="doc.style" ng-class="section_class" ng-click="getFocus()">' +
-								'<div ng-repeat="item in doc.data" ng-style="item.style" ng-controller="SectionController" ng-click="getFocus()">' +
-								// '{{section_class}}{{gettingFocus}}<hr>' +
+								'<div ng-repeat="item in doc.data" ng-style="item.style" ng-controller="SectionController" >' +
+								'{{allowEdit}}<hr>' +
 								'<div section></div>' +
 								'</div></div>'
 			case "hr":
@@ -148,11 +150,10 @@ function SectionController($scope, $element, focus, $rootScope){
 	
 	$scope.doc = $scope.doc.data[$scope.$index]
 	$scope.section_class = []
-	$scope.allowEdit = false
+	if ($scope.doc.type == "container"){
+		$scope.allowEdit = false
+	}
 
-	// if ($scope.doc.type == "container"){
-	// 	$scope.allowEdit = false
-	// }
 
 }
 
