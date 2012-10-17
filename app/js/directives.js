@@ -4,12 +4,12 @@ angular.module('rbDirectives',[])
 		restrict: 'A',
 		link: function(scope, element, attrs){
 
-			scope.$on('delete', function(event, index){
-				if (!scope.gettingDeleted){
-					event.stopPropagation()
-					scope.deleteChildByIndex(index)
-				}
-			})
+			// scope.$on('delete', function(event, index){
+			// 	if (!scope.gettingDeleted){
+			// 		event.stopPropagation()
+			// 		scope.deleteChildByIndex(index)
+			// 	}
+			// })
 
 			scope.$watch('doc.type', function(value){
 				var html = scope.template(value)

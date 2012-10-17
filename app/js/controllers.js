@@ -76,15 +76,18 @@ function MainCtrl($scope, $element, $http, focus){
 
 	//should probably move this stuff into a RootSectionController later. bind to div in index
 
-	$scope.deleteChildByIndex = function(index){
-		this.doc.data.splice(index, 1)
-	}
+	// $scope.deleteChildByIndex = function(index){
+	// 	this.doc.data.splice(index, 1)
+	// }
 
 	$scope.deleteSection = function(){
-		if (!angular.isUndefined(this.$index)) {
-			this.gettingDeleted = true
-			this.$emit('delete', this.$index)
-		}
+		// if (!angular.isUndefined(this.$index)) {
+		// 	this.gettingDeleted = true
+		// 	this.$emit('delete', this.$index)
+		// }
+
+		this.parentDoc.data.splice(this.$index, 1)
+
 	}
 
 	$scope.local_css = []
@@ -155,6 +158,7 @@ function MainCtrl($scope, $element, $http, focus){
 
 function SectionController($scope, $element, focus, $rootScope){
 	
+	$scope.parentDoc = $scope.doc
 	$scope.doc = $scope.doc.data[$scope.$index]
 	$scope.local_css = []
 	if ($scope.doc.type == "container"){
