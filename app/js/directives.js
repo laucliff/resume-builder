@@ -11,10 +11,6 @@ angular.module('rbDirectives',[])
 				}
 			})
 
-			scope.$on('newFocus', function(){
-			  scope.newFocus()
-			})
-
 			scope.$watch('doc.type', function(value){
 				var html = scope.template(value)
 				newElement = $compile(html)(scope)

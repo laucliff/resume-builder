@@ -1,4 +1,4 @@
-function MainCtrl($scope, $element, $http, focus, $rootScope){
+function MainCtrl($scope, $element, $http, focus){
 
 
 	// $http.get('templates/prototype.json').success(function(data){
@@ -76,6 +76,7 @@ function MainCtrl($scope, $element, $http, focus, $rootScope){
 	}
 
 
+	//should probably move this stuff into a RootSectionController later. bind to div in index
 
 	$scope.deleteChildByIndex = function(index){
 		this.doc.data.splice(index, 1)
@@ -88,55 +89,55 @@ function MainCtrl($scope, $element, $http, focus, $rootScope){
 		}
 	}
 
-
-	$scope.section_class = []
-	$scope.allowEdit = false
+	$scope.container = {
+		"css" : [],
+		"allowEdit" : false
+	}
 
 
 	$scope.toggleEdit = function(){
-		if(this.doc.type == "container"){
-			this.allowEdit = !this.allowEdit
-		}
+			this.container.allowEdit = !this.container.allowEdit
 	}
 
 	$scope.getFocus = function(){
-		console.log(this.doc.data)
 		event.stopPropagation() //prevent ng-click propagation
-
-		focus.requestFocus(this, this.doc.style, this.addFocus, function(){
-			this.toggleEdit()
-			this.section_class = _.without(this.section_class, "focus")
-		})
-
+		focus.requestFocus(this, this.doc.style, this.addFocus, this.dropFocus)
 	}
 
 	$scope.addFocus = function(){
 		this.toggleEdit()
-		this.section_class = _.union(this.section_class, ["focus"])
-
+		this.container.css = _.union(this.container.css, ["focus"])
+		// add local css here
 	}
+
+	$scope.dropFocus = function(){
+		this.toggleEdit()
+		this.container.css = _.without(this.container.css, "focus")
+		// drop local css here
+	}
+
 
 
 	$scope.template = function(type){
 		switch(type){
 			case "text":
 				return 	'' +
-								// '<div ng-class="section_class" ng-click="getFocus()">' +
-								'<div>' +
-								'<div ng-style="doc.style" ng-hide="allowEdit">{{doc.data}}</div>' +
-								'<input aa type="text" ng-style="doc.style" ng-model="doc.data" ng-show="allowEdit">' +
+								'<div ng-click="getFocus()">' +
+								// '<div>' +
+								'<div ng-style="doc.style" ng-hide="container.allowEdit">{{doc.data}}</div>' +
+								'<input type="text" ng-style="doc.style" ng-model="doc.data" ng-show="container.allowEdit">' +
 								'</div>'
 				break;
 			case "textarea": //remove this later
-				return '<textarea ng-style="doc.style" ng-model="doc.data">'
+				return '<textarea ng-style="doc.style" ng-model="doc.data" ng-click="getFocus()">'
 			case "container":
-				return '<div ui:sortable ng-model="doc.data" ng-style="doc.style" ng-class="section_class" ng-click="getFocus()">' +
-								'<div ng-repeat="item in doc.data" ng-style="item.style" ng-controller="SectionController" >' +
-								'{{allowEdit}}<hr>' +
+				return '<div ui:sortable ng-model="doc.data" ng-style="doc.style" ng-class="container.css" ng-click="getFocus()">' +
+								'<div ng-repeat="item in doc.data" ng-style="item.style" ng-controller="SectionController">' +
+								// '{{container}}<hr>' +
 								'<div section></div>' +
 								'</div></div>'
 			case "hr":
-				return '<hr ng-style="doc.style">'
+				return '<div ng-click="getFocus()"><hr ng-style="doc.style"></div>'
 			default: 
 				return '<div ng-style="doc.style" ng-model="doc.data">{{doc.data}}</div>'
 				
@@ -149,11 +150,13 @@ function MainCtrl($scope, $element, $http, focus, $rootScope){
 function SectionController($scope, $element, focus, $rootScope){
 	
 	$scope.doc = $scope.doc.data[$scope.$index]
-	$scope.section_class = []
-	if ($scope.doc.type == "container"){
-		$scope.allowEdit = false
-	}
 
+	if ($scope.doc.type == "container"){
+		$scope.container = {
+			"css" : [],
+			"allowEdit" : false
+		}
+	}
 
 }
 
