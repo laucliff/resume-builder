@@ -38,3 +38,7 @@ body{
 .focus{
 	border: 5px solid red !important;
 }
+
+.local-focus{
+	border: 3px dotted blue !important;
+}

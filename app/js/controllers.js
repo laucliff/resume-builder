@@ -9,8 +9,6 @@ function MainCtrl($scope, $element, $http, focus){
 
 	$scope.testval = 'awedg'
 
-	// $scope.allowEdit = false
-
 	$scope.doc = {
 		type: 'container',
 		style: {
@@ -89,11 +87,12 @@ function MainCtrl($scope, $element, $http, focus){
 		}
 	}
 
+	$scope.local_css = []
 	$scope.container = {
 		"css" : [],
 		"allowEdit" : false
 	}
-
+	$scope.rootSection = true
 
 	$scope.toggleEdit = function(){
 			this.container.allowEdit = !this.container.allowEdit
@@ -106,14 +105,14 @@ function MainCtrl($scope, $element, $http, focus){
 
 	$scope.addFocus = function(){
 		this.toggleEdit()
-		this.container.css = _.union(this.container.css, ["focus"])
-		// add local css here
+		this.container.css = _.union(this.container.css, "focus")
+		this.local_css = _.union(this.local_css, "local-focus")
 	}
 
 	$scope.dropFocus = function(){
 		this.toggleEdit()
 		this.container.css = _.without(this.container.css, "focus")
-		// drop local css here
+		this.local_css = _.without(this.local_css, "local-focus")
 	}
 
 
@@ -122,22 +121,29 @@ function MainCtrl($scope, $element, $http, focus){
 		switch(type){
 			case "text":
 				return 	'' +
-								'<div ng-click="getFocus()">' +
+								'<div ng-class="local_css" ng-click="getFocus()">' +
 								// '<div>' +
 								'<div ng-style="doc.style" ng-hide="container.allowEdit">{{doc.data}}</div>' +
 								'<input type="text" ng-style="doc.style" ng-model="doc.data" ng-show="container.allowEdit">' +
+								'<button class="section-delete" ng-show="container.allowEdit" ng-click="deleteSection()">&times;</button>' +
 								'</div>'
 				break;
 			case "textarea": //remove this later
-				return '<textarea ng-style="doc.style" ng-model="doc.data" ng-click="getFocus()">'
+				return '<div>' +
+							'<button class="section-delete" ng-show="container.allowEdit" ng-click="deleteSection()">&times;</button>' +
+							'<textarea ng-style="doc.style" ng-class="local_css" ng-model="doc.data" ng-click="getFocus()">' +
+							'</div>'
 			case "container":
 				return '<div ui:sortable ng-model="doc.data" ng-style="doc.style" ng-class="container.css" ng-click="getFocus()">' +
 								'<div ng-repeat="item in doc.data" ng-style="item.style" ng-controller="SectionController">' +
-								// '{{container}}<hr>' +
+								// '{{local_css}}<hr>' +
 								'<div section></div>' +
-								'</div></div>'
+								'</div><button class="section-delete" ng-show="container.allowEdit&&!rootSection" ng-click="deleteSection()">&times;</button></div>'
 			case "hr":
-				return '<div ng-click="getFocus()"><hr ng-style="doc.style"></div>'
+				return '<div ng-class="local_css" ng-click="getFocus()">' +
+								'<hr ng-style="doc.style">' +
+								'<button class="section-delete" ng-show="container.allowEdit" ng-click="deleteSection()">&times;</button>' +
+								'</div>'
 			default: 
 				return '<div ng-style="doc.style" ng-model="doc.data">{{doc.data}}</div>'
 				
@@ -150,13 +156,14 @@ function MainCtrl($scope, $element, $http, focus){
 function SectionController($scope, $element, focus, $rootScope){
 	
 	$scope.doc = $scope.doc.data[$scope.$index]
-
+	$scope.local_css = []
 	if ($scope.doc.type == "container"){
 		$scope.container = {
 			"css" : [],
 			"allowEdit" : false
 		}
 	}
+	$scope.rootSection = false
 
 }
 
