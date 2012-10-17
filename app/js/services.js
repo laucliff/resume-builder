@@ -1,12 +1,18 @@
 angular.module('rbServices',[]).factory('focus', function(){
-	var sectionStyle, sectionFocus, sectionCallback
+	var sectionStyle = {
+		style : {}
+	} 
+	var sectionFocus, sectionCallback
 	var styleBox, styleCallback
 
 	return {
-		setStyleCB: function(context, callback){
-			styleBox = context
-			styleCallback = callback
+		getStyle: function(){
+			return sectionStyle
 		},
+		// setStyleCB: function(context, callback){
+		// 	styleBox = context
+		// 	styleCallback = callback
+		// },
 		requestFocus: function(section, style, approveFocus, dropFocus){
 			
 			//signal old focus to drop
@@ -16,16 +22,24 @@ angular.module('rbServices',[]).factory('focus', function(){
 
 			//reassign to new focus
 			sectionFocus = section
-			sectionStyle = style
 			sectionCallback = dropFocus
+			sectionStyle.style = style
+
 
 			//signal new focus approved
 			approveFocus.call(sectionFocus)
 
-			//signal stylebox to rebind style
-			styleCallback.call(styleBox, sectionStyle)
 			
 		}
 	}
+})
+.factory('styleService', function(focus){
 
-});
+
+	return {
+		getStyle: function(){
+			return focus.getStyle()
+		}
+	}
+
+})

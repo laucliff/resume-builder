@@ -59,9 +59,9 @@
 
 </div>
 	<div stylebox ng-controller="StyleController">
-		{{style}}
+		{{style}}<hr>{{currentFocus.style}}
 		<div ng-repeat="attr in styleAttrs">
-			{{attr}}:<input type="text" ng-model="style[attr]">
+			{{attr}}:<input type="text" ng-model="currentFocus.style[attr]">
 		</div>
 	</div>
 

@@ -171,15 +171,13 @@ function SectionController($scope, $element, focus, $rootScope){
 
 }
 
-function StyleController($scope, $element, focus){
+function StyleController($scope, $element, focus, styleService){
 	$scope.styleAttrs = [
 		"background-color",
 		"border",
 		"left"
 	]
 
-	focus.setStyleCB($scope, function(newStyle){
-		this.style = newStyle
-	})
+	$scope.currentFocus = styleService.getStyle()
 
 }
