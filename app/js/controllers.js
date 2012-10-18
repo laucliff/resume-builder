@@ -13,7 +13,9 @@ function MainCtrl($scope, $element, $http, focus){
 		type: 'container',
 		style: {
 			'background-color': 'gray',
-			'border' : '1px solid black'
+			'border' : '1px solid black',
+			'width' : '8.5in',
+			'height' : '11in'
 			},
 		data: [
 			{
@@ -120,6 +122,7 @@ function MainCtrl($scope, $element, $http, focus){
 
 
 
+
 	$scope.template = function(type){
 		switch(type){
 			case "text":
@@ -175,7 +178,8 @@ function StyleController($scope, $element, focus, styleService){
 	$scope.styleAttrs = [
 		"background-color",
 		"border",
-		"left"
+		"left",
+		"width"
 	]
 
 	$scope.currentFocus = styleService.getStyle()

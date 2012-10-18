@@ -11,17 +11,14 @@ body{
 	background: #efefef;
 }
 
-.page{
-
-}
-
 .container{
 	background-color: white;
 	
 }
 
-.attribute-panel{
-	background-color: gray;
+.sortable-placeholder{
+	background-color: red;
+	height: 5px;
 }
 
 .section{
@@ -41,4 +38,12 @@ body{
 
 .local-focus{
 	border: 3px dotted blue !important;
+}
+
+.stylebox{
+	background-color: gray;
+	position: fixed;
+	width: 5in;
+	top: 10px;
+	right: 20px;
 }
