@@ -11,33 +11,46 @@ body{
 	background: #efefef;
 }
 
-.container{
-	background-color: white;
-	
-}
 
 .sortable-placeholder{
 	background-color: red;
 	height: 5px;
 }
 
-.section{
+/*.section{
 	background-color: orange;
 	position: relative;
-/*	top: 100px;
-	left: 400px;*/
+	top: 100px;
+	left: 400px;
 	border: 1px solid black;
 	width: 200px;
 	height: 100px;
 	padding: 10px;
+}*/
+
+.page{
+	padding: 1in;
+	/*padding-left: 1in;*/
+	/*padding-right: 1in;*/
+}
+
+.sectionContainer{
+	position: relative;
+	word-wrap: break-word;
 }
 
 .focus{
-	border: 5px solid red !important;
+	border: 3px solid red !important;
 }
 
-.local-focus{
+.localFocus{
 	border: 3px dotted blue !important;
+}
+
+.section-delete{
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
 }
 
 .stylebox{

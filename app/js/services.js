@@ -35,10 +35,15 @@ angular.module('rbServices',[]).factory('focus', function(){
 })
 .factory('styleService', function(focus){
 
+	var currentFocus = {}
 
 	return {
 		getStyle: function(){
-			return focus.getStyle()
+			currentFocus =  focus.getStyle()
+			return currentFocus
+		},
+		addStyle: function(newStyle){
+			_.extend(currentFocus.style,newStyle)
 		}
 	}
 

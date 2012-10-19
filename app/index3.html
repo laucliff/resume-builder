@@ -47,6 +47,9 @@
 
 		{{doc}}
 <hr>
+{{testval}}
+<div contenteditable ng-model="testval"></div>
+<hr>
 
 	<div section></div>
 
@@ -63,6 +66,7 @@
 		<div ng-repeat="attr in styleAttrs">
 			{{attr}}:<input type="text" ng-model="currentFocus.style[attr]">
 		</div>
+		<!-- <button ng-click="addStyle()">+</button> -->
 	</div>
 
 
