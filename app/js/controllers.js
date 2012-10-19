@@ -1,4 +1,4 @@
-function MainCtrl($scope, $element, $http, focus){
+function MainCtrl($scope, $element, $http, focus, $compile){
 
 
 	// $http.get('templates/prototype.json').success(function(data){
@@ -10,7 +10,7 @@ function MainCtrl($scope, $element, $http, focus){
 	$scope.testval = 'awedg'
 
 
-	contactInfo = {
+	contactInfoPre = {
 		type: "contact",
 		style: {
 		},
@@ -20,7 +20,6 @@ function MainCtrl($scope, $element, $http, focus){
 			address: "123 something way"
 		}
 	}
-
 
 	resumeIntro = {
 		type: "container",
@@ -36,6 +35,24 @@ function MainCtrl($scope, $element, $http, focus){
 					"font-size": "24pt"
 				},
 				data: "Lorem \nIpsum"
+			}
+		]
+	}
+
+	experienceEntry = {
+		type: "container",
+		style:{
+			border: "1px solid black"
+		},
+		data: [
+			{
+				type: "text",
+				style: {
+					"text-align": "center",
+					"font-family": "arial",
+					"font-size": "20pt"
+				},
+				data: "Experiences"
 			}
 		]
 	}
@@ -127,6 +144,9 @@ function MainCtrl($scope, $element, $http, focus){
 							style: {
 								'background-color': 'salmon'
 							},
+												styleClass: [
+			'focus'
+		],
 							data: '9',
 							type: 'text'
 						}
@@ -211,6 +231,12 @@ function MainCtrl($scope, $element, $http, focus){
 		this.local_focus = false
 	}
 
+	$scope.styleClass = function(){
+		// console.log(this.doc.data)
+		if(!_.isUndefined(this.doc.styleClass)){
+			return this.doc.styleClass.join(" ")
+		}
+	}
 
 
 
@@ -220,12 +246,12 @@ function MainCtrl($scope, $element, $http, focus){
 				return 	'' +
 								// '<div ng-class="{localFocus:local_focus}" ng-click="getFocus()">' +
 								'<div style="position: relative">' +
-								'<div style="position: relative" ng-style="doc.style" ng-hide="container.allowEdit">{{doc.data}}</div>' +
-								'<textarea style="position: relative" ng-style="doc.style" ng-model="doc.data" ng-show="container.allowEdit">' +
+								'<div style="position: relative" class="{{styleClass()}}" ng-style="doc.style" ng-hide="container.allowEdit">{{doc.data}}</div>' +
+								'<input type="text" style="position: relative" class="{{styleClass}}" ng-style="doc.style" ng-model="doc.data" ng-show="container.allowEdit">' +
 								'<button class="section-delete" ng-show="container.allowEdit" ng-click="deleteSection()">&times;</button>' +
 								'</div>'
 			case "text-constant":
-				return '<div style="position: relative" ng-style="doc.style">{{doc.data}}</div>'
+				return '<div style="position: relative" class="{{styleClass()}}" ng-style="doc.style">{{doc.data}}</div>'
 			case "textarea": //remove this later
 				return '<div style="position: relative">' +
 							'<button class="section-delete" ng-show="container.allowEdit" ng-click="deleteSection()">&times;</button>' +
@@ -234,7 +260,7 @@ function MainCtrl($scope, $element, $http, focus){
 			case "container":
 				return '<div style="position: relative" ui:sortable ng-model="doc.data" ng-style="doc.style" class="sectionContainer" ng-class="{focus: container.hasFocus, page: isRootSection}" ng-click="getFocus()">' +
 									'<div ng-repeat="item in doc.data" ng-class="{localFocus:local_focus}" ng-click= "getFocus()" ng-controller="SectionController">' +
-									// '{{local_css}}<hr>' +
+									// '{{styleClass()}}<hr>' +
 										'<div section></div>' +
 									'</div>' + 
 									'<button class="section-delete" ng-show="container.allowEdit&&!isRootSection" ng-click="deleteSection()">&times;</button>' + 
@@ -254,16 +280,13 @@ function MainCtrl($scope, $element, $http, focus){
 									'<button ng-show="container.allowEdit" ng-click="addSection()">+</button>' +
 								'</ul>'
 			case "container-columns":
-				return '<div>' +
-								'<div style="position: relative" ng-model="doc.data" ng-style="doc.style" class="sectionContainer" ng-class="{focus: container.hasFocus, page: isRootSection}" ng-click="getFocus()">' +
+				return '<div style="position: relative" ng-model="doc.data" ng-style="doc.style" class="sectionContainer" ng-class="{focus: container.hasFocus, page: isRootSection}" ng-click="getFocus()">' +
 									'<div style="float: left; width: 49%;" ui:sortable ng-repeat="item in doc.data" ng-class="{localFocus:local_focus}" ng-click="getFocus()" ng-controller="SectionController">' +
-									// '{{local_css}}<hr>' +
 										'<div section></div>' +
 									'</div>' + 
-									'<div style="clear:both">foot</div>'
+									'<div style="clear:both">foot</div>' +
 									'<button class="section-delete" ng-show="container.allowEdit&&!isRootSection" ng-click="deleteSection()">&times;</button>' + 
 									'<button ng-show="container.allowEdit" ng-click="addSection()">+</button>' +
-								'</div>'
 								'</div>'
 			default: 
 				return '<div ng-style="doc.style" ng-model="doc.data">{{doc.data}}</div>'
@@ -278,7 +301,6 @@ function SectionController($scope, $element, focus, $rootScope){
 	
 	$scope.parentDoc = $scope.doc
 	$scope.doc = $scope.doc.data[$scope.$index]
-	console.log($scope.doc, ':', $scope.parentDoc)
 	// $scope.local_css = []
 	$scope.local_focus = false
 
