@@ -35,11 +35,33 @@ function MainCtrl($scope, $element, $http, focus, $compile){
 					"font-size": "24pt"
 				},
 				data: "Lorem \nIpsum"
+			}, {
+		    "type": "text",
+		    "style": {
+		    	"text-align": "center",
+		    	"font-size": "10pt"
+		    },
+		    "data": "email@email.com"
+			}, {
+		    "type": "text",
+		    "style": {
+		    	"text-align": "center",
+		    	"font-size": "10pt"
+		    },
+		    "data": "(123) 456-7890"
+			}, {
+		    "type": "text",
+		    "style": {
+		    	"text-align": "center",
+		    	"font-size": "10pt"
+		    },
+		    "data": "21 Jump St"
 			}
 		]
 	}
 
-	experienceEntry = {
+
+	experienceIteration = {
 		type: "container",
 		style:{
 			border: "1px solid black"
@@ -48,25 +70,66 @@ function MainCtrl($scope, $element, $http, focus, $compile){
 			{
 				type: "text",
 				style: {
-					"text-align": "center",
+					"text-align": "left",
 					"font-family": "arial",
-					"font-size": "20pt"
+					"font-size": "14pt"
+				},
+				data: "Experience Title"
+			},
+			{
+				type: "text",
+				style: {
+					"text-align": "left",
+					"font-family": "arial",
+					"font-size": "12pt"
+				},
+				data: "Description goes here..."
+			}
+		],
+		iteration: {
+			type: "text",
+			style: {
+				"text-align": "left",
+				"font-family": "arial",
+				"font-size": "12pt"
+			},
+			data: "Description goes here..."
+		}
+	}
+
+	experience = {
+		type: "container",
+		style:{
+			border: "1px solid black"
+		},
+		data: [
+			{
+				type: "text",
+				style: {
+					"text-align": "left",
+					"font-family": "arial",
+					"font-size": "16pt"
 				},
 				data: "Experiences"
 			}
-		]
+		],
+		iteration: experienceIteration
 	}
 
 	$scope.doc = {
 		type: 'container',
 		style: {
-			'background-color': 'gray',
+			'background-color': 'lightgray',
 			'border' : '1px solid black',
 			'width' : '8.5in',
 			'min-height' : '11in'
 			},
 		data: [
-			// resumeIntro,
+			resumeIntro,
+			{
+				type: 'hr'
+			},
+			experience,
 			// {
 			// 	style: {
 			// 		'background-color': 'orange',
@@ -144,9 +207,6 @@ function MainCtrl($scope, $element, $http, focus, $compile){
 							style: {
 								'background-color': 'salmon'
 							},
-												styleClass: [
-			'focus'
-		],
 							data: '9',
 							type: 'text'
 						}
@@ -183,9 +243,13 @@ function MainCtrl($scope, $element, $http, focus, $compile){
 		newDoc = {
 			type: "text",
 			style: {},
-			data: ""
+			data: "new text"
 		}
 
+		if (!_.isUndefined(this.doc.iteration)){
+			newDoc = angular.copy(this.doc.iteration)
+		}
+		
 		if (this.isContainer()) {
 			this.doc.data.push(newDoc)
 		}
