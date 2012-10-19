@@ -69,30 +69,18 @@ function MainCtrl($scope, $element, $http, focus, $compile){
 		data: [
 			{
 				type: "text",
-				style: {
-					"text-align": "left",
-					"font-family": "arial",
-					"font-size": "14pt"
-				},
+				styleClass: ["section-title"],
 				data: "Experience Title"
 			},
 			{
 				type: "text",
-				style: {
-					"text-align": "left",
-					"font-family": "arial",
-					"font-size": "12pt"
-				},
+				styleClass: ["section-detail"],
 				data: "Description goes here..."
 			}
 		],
 		iteration: {
 			type: "text",
-			style: {
-				"text-align": "left",
-				"font-family": "arial",
-				"font-size": "12pt"
-			},
+			styleClass: ["section-detail"],
 			data: "Description goes here..."
 		}
 	}
@@ -105,11 +93,7 @@ function MainCtrl($scope, $element, $http, focus, $compile){
 		data: [
 			{
 				type: "text",
-				style: {
-					"text-align": "left",
-					"font-family": "arial",
-					"font-size": "16pt"
-				},
+				styleClass: ["section-header"],
 				data: "Experiences"
 			}
 		],
@@ -249,7 +233,7 @@ function MainCtrl($scope, $element, $http, focus, $compile){
 		if (!_.isUndefined(this.doc.iteration)){
 			newDoc = angular.copy(this.doc.iteration)
 		}
-		
+
 		if (this.isContainer()) {
 			this.doc.data.push(newDoc)
 		}
@@ -311,7 +295,7 @@ function MainCtrl($scope, $element, $http, focus, $compile){
 								// '<div ng-class="{localFocus:local_focus}" ng-click="getFocus()">' +
 								'<div style="position: relative">' +
 								'<div style="position: relative" class="{{styleClass()}}" ng-style="doc.style" ng-hide="container.allowEdit">{{doc.data}}</div>' +
-								'<input type="text" style="position: relative" class="{{styleClass}}" ng-style="doc.style" ng-model="doc.data" ng-show="container.allowEdit">' +
+								'<input type="text" style="position: relative" class="{{styleClass()}}" ng-style="doc.style" ng-model="doc.data" ng-show="container.allowEdit">' +
 								'<button class="section-delete" ng-show="container.allowEdit" ng-click="deleteSection()">&times;</button>' +
 								'</div>'
 			case "text-constant":
