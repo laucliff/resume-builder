@@ -29,8 +29,22 @@ angular.module('rbServices',[]).factory('focus', function(){
 			//signal new focus approved
 			approveFocus.call(sectionFocus)
 
-			
+		},
+		dropAllFocus: function(){
+
+			//signal old focus to drop
+			if (sectionFocus){
+				sectionCallback.call(sectionFocus)
+			} 
+
+			//reset focus assignment
+			//reassign to new focus
+			sectionFocus = null
+			sectionCallback = null
+			sectionStyle.style = null
+
 		}
+
 	}
 })
 .factory('styleService', function(focus){

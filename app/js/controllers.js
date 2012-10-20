@@ -5,6 +5,12 @@ function MainCtrl($scope, $element, $http, focus, $compile){
 	// 	$scope.doc = data
 	// })
 
+	$(document).bind('keydown', function(e){
+		if (e.keyCode == 27){
+			focus.dropAllFocus()
+			$scope.$digest()
+		}
+	})
 
 
 	$scope.testval = 'awedg'
