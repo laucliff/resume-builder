@@ -81,6 +81,7 @@ function MainCtrl($scope, $element, $http, focus, $compile){
 		iteration: {
 			type: "text",
 			styleClass: ["section-detail"],
+			style:{},
 			data: "Description goes here..."
 		}
 	}
@@ -306,7 +307,7 @@ function MainCtrl($scope, $element, $http, focus, $compile){
 							'<textarea ng-style="doc.style" ng-model="doc.data">' +
 							'</div>'
 			case "container":
-				return '<div style="position: relative" ui:sortable ng-model="doc.data" ng-style="doc.style" class="sectionContainer" ng-class="{focus: container.hasFocus, page: isRootSection}" ng-click="getFocus()">' +
+				return '<div style="position: relative" sortable="{disabled: !container.allowEdit}" ng-model="doc.data" ng-style="doc.style" class="sectionContainer" ng-class="{focus: container.hasFocus, page: isRootSection}" ng-click="getFocus()">' +
 									'<div ng-repeat="item in doc.data" ng-class="{localFocus:local_focus}" ng-click= "getFocus()" ng-controller="SectionController">' +
 									// '{{styleClass()}}<hr>' +
 										'<div section></div>' +
@@ -320,7 +321,7 @@ function MainCtrl($scope, $element, $http, focus, $compile){
 								'<button class="section-delete" ng-show="container.allowEdit" ng-click="deleteSection()">&times;</button>' +
 								'</div>'
 			case "container-list":
-				return '<ul style="position: relative" ui:sortable ng-model="doc.data" ng-style="doc.style" class="sectionContainer" ng-class="{focus: container.hasFocus, page: isRootSection}" ng-click="getFocus()">' +
+				return '<ul style="position: relative" sortable="{disabled: !container.allowEdit}" ng-model="doc.data" ng-style="doc.style" class="sectionContainer" ng-class="{focus: container.hasFocus, page: isRootSection}" ng-click="getFocus()">' +
 									'<li ng-repeat="item in doc.data" ng-class="{localFocus:local_focus}" ng-click= "getFocus()" ng-controller="SectionController">' +
 										'<div section></div>' +
 									'</li>' + 
@@ -329,7 +330,7 @@ function MainCtrl($scope, $element, $http, focus, $compile){
 								'</ul>'
 			case "container-columns":
 				return '<div style="position: relative" ng-model="doc.data" ng-style="doc.style" class="sectionContainer" ng-class="{focus: container.hasFocus, page: isRootSection}" ng-click="getFocus()">' +
-									'<div style="float: left; width: 49%;" ui:sortable ng-repeat="item in doc.data" ng-class="{localFocus:local_focus}" ng-click="getFocus()" ng-controller="SectionController">' +
+									'<div style="float: left; width: 49%;" sortable="{disabled: !container.allowEdit}" ng-repeat="item in doc.data" ng-class="{localFocus:local_focus}" ng-click="getFocus()" ng-controller="SectionController">' +
 										'<div section></div>' +
 									'</div>' + 
 									'<div style="clear:both">foot</div>' +
