@@ -50,8 +50,7 @@
 {{testval}}
 <div contenteditable ng-model="testval"></div>
 <hr>
-
-	<div section></div>
+<div section></div>
 
 <!-- 	<div ui:sortable ng-model="doc.data" ng-style="doc.style">
 	<div ng-repeat="item in doc.data" ng-style="item.style" ng-controller="SectionController">
@@ -61,13 +60,14 @@
 
 
 </div>
-	<div class="stylebox" stylebox ng-controller="StyleController">
-		{{style}}<hr>{{currentFocus.style}}
-		<div ng-repeat="attr in styleAttrs">
-			{{attr}}:<input type="text" ng-model="currentFocus.style[attr]">
-		</div>
-		<!-- <button ng-click="addStyle()">+</button> -->
+
+<div class="stylebox" stylebox ng-controller="StyleController">
+	{{style}}<hr>{{currentFocus.style}}
+	<div ng-repeat="attr in styleAttrs">
+		{{attr}}:<input type="text" ng-model="currentFocus.style[attr]">
 	</div>
+		<!-- <button ng-click="addStyle()">+</button> -->
+</div>
 
 
 

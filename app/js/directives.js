@@ -55,12 +55,32 @@ angular.module('rbDirectives',[])
  		}
  	}
  })
+.directive('slider', function(){
+	return{
+		restrict: 'A',
+		require: '?ngModel',
+		link: function(scope, element, attrs, ngModel){
+			var opts = {}
+
+			if (!ngModel) return
+
+			ngModel.$render = function(){
+				element.slider({'value':ngModel.$viewValue})
+			}
+			opts.stop = function(e, ui){
+				scope.$apply(ngModel.$setViewValue(ui.value))
+			}
+
+			return element.slider(opts)
+		}
+	}
+})
 .directive('sortable', function(){
     return {
     	restrict: 'A',
       require: '?ngModel',
       link: function(scope, element, attrs, ngModel) {
-        var onStart, onUpdate, opts, _start, _update;
+        var onStart, onUpdate, opts, _start, _update
 
         // opts = angular.extend({}, scope.$eval(attrs["sortable"]))
         opts = {}

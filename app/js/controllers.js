@@ -12,7 +12,6 @@ function MainCtrl($scope, $element, $http, focus, $compile){
 		}
 	})
 
-
 	$scope.testval = 'awedg'
 
 
