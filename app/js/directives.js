@@ -1,15 +1,8 @@
 angular.module('rbDirectives',[])
-.directive('section', function($compile, $rootScope, focus){
+.directive('section', function($compile, focus){
 	return {
 		restrict: 'A',
 		link: function(scope, element, attrs){
-
-			// scope.$on('delete', function(event, index){
-			// 	if (!scope.gettingDeleted){
-			// 		event.stopPropagation()
-			// 		scope.deleteChildByIndex(index)
-			// 	}
-			// })
 
 			scope.$watch('doc.type', function(value){
 				var html = scope.template(value)
@@ -55,21 +48,44 @@ angular.module('rbDirectives',[])
  		}
  	}
  })
+.directive('styleWidget', function($compile){
+ 	return {
+ 		restrict: 'A',
+ 		require: '?ngModel',
+ 		link: function(scope, element, attrs, ngModel){
+
+ 			var html = scope.template(scope.$eval(attrs.styleWidget))
+ 			element.html($compile(html)(scope))
+
+ 		}
+ 	}
+ })
 .directive('slider', function(){
 	return{
 		restrict: 'A',
 		require: '?ngModel',
 		link: function(scope, element, attrs, ngModel){
 			var opts = {}
+			var suffix =  attrs.suffix || ''
+
 
 			if (!ngModel) return
 
 			ngModel.$render = function(){
-				element.slider({'value':ngModel.$viewValue})
+				var rawValue = ngModel.$viewValue || 0
+				var numericValue = angular.isString(rawValue) ? rawValue.replace(/\D/g,'') : rawValue
+
+				element.slider({'value': numericValue})
 			}
-			opts.stop = function(e, ui){
-				scope.$apply(ngModel.$setViewValue(ui.value))
+			opts.slide = function(e, ui){
+				var suffixedValue = ui.value + suffix
+				ngModel.$setViewValue(suffixedValue)
+				return scope.$apply()
 			}
+
+      scope.$watch(attrs.slider, function(n, v){
+      	element.slider(scope.$eval(attrs.slider))
+      }, true)
 
 			return element.slider(opts)
 		}

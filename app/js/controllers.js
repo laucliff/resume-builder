@@ -12,6 +12,7 @@ function MainCtrl($scope, $element, $http, focus, $compile){
 		}
 	})
 
+
 	$scope.testval = 'awedg'
 
 
@@ -381,7 +382,41 @@ function StyleController($scope, $element, focus, styleService){
 		"font-family"
 	]
 
+	$scope.styleSet = [
+		{
+			name: "width",
+			ui: "slider",
+			suffix: "%",
+			params: {}
+		},{
+			name: "height",
+			ui: "slider",
+			suffix: "px",
+			params: {max: 500}
+		},{
+			name: "padding-left",
+			ui: "slider",
+			suffix: "%",
+			params: {}
+		},{
+			name: "padding-top",
+			ui: "slider",
+			suffix: "%",
+			params: {}
+		}
+	]
+
 	$scope.currentFocus = styleService.getStyle()
+
+
+	$scope.template = function(opts){
+
+		switch(opts.ui){
+			case "slider":
+				return '<div slider="'+ JSON.stringify(opts.params).replace(/"/g,"&quot;") +'" ng-model="' +  'currentFocus.style[&quot;' + opts.name + '&quot;]' +'" suffix="' + opts.suffix +'"></div>'
+		}
+	}
+
 
 	$scope.addStyle = function(){
 
