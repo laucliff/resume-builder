@@ -37,7 +37,7 @@ function MainCtrl($scope, $element, $http, focus, $compile){
 				type: "text",
 				style: {
 					"text-align": "center",
-					"font-family": "arial",
+					"font-family": "Arial",
 					"font-size": "24pt"
 				},
 				data: "Lorem \nIpsum"
@@ -382,6 +382,8 @@ function StyleController($scope, $element, focus, styleService){
 		"font-family"
 	]
 
+	$scope.fonts = ["Arial", "Courier", "Times New Roman"]
+
 	$scope.styleSet = [
 		{
 			name: "width",
@@ -403,17 +405,29 @@ function StyleController($scope, $element, focus, styleService){
 			ui: "slider",
 			suffix: "%",
 			params: {}
+		},{
+			name: "font-size",
+			ui: "slider",
+			suffix: "pt",
+			params: {min: 5, max:50}
+		},{
+			name: "font-family",
+			ui: "select",
+			params: {}
 		}
 	]
 
 	$scope.currentFocus = styleService.getStyle()
 
-
 	$scope.template = function(opts){
+
+		var model = 'currentFocus.style[&quot;' + opts.name + '&quot;]'
 
 		switch(opts.ui){
 			case "slider":
-				return '<div slider="'+ JSON.stringify(opts.params).replace(/"/g,"&quot;") +'" ng-model="' +  'currentFocus.style[&quot;' + opts.name + '&quot;]' +'" suffix="' + opts.suffix +'"></div>'
+				return '<div slider="'+ JSON.stringify(opts.params).replace(/"/g,"&quot;") +'" ng-model="' + model +'" suffix="' + opts.suffix +'"></div>'
+			case "select":
+				return '<select ng-model="'+ model +'" ng-options="font for font in fonts">'
 		}
 	}
 

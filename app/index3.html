@@ -68,9 +68,8 @@
 	</div>
 
 	<div ng-repeat="style in styleSet">
-		{{style.name}}:<div style-widget="style">{{style}}</div>
+		{{style.name}}: {{currentFocus.style[style.name]}}<div style-widget="style">{{style}}</div>
 	</div>
-
 
 	<!-- <button ng-click="addStyle()">+</button> -->
 </div>
