@@ -388,12 +388,14 @@ function MainCtrl($scope, $element, $http, focus, $compile){
 									// '{{styleClass()}}<hr>' +
 										'<div section></div>' +
 									'</div>' + 
+									'<div class="sort-handle" ng-show="parentContainer.allowEdit&&!isRootSection">M</div>' +
 									'<button class="section-delete" ng-show="container.allowEdit&&!isRootSection" ng-click="deleteSection()">&times;</button>' + 
 									'<button ng-show="container.allowEdit" ng-click="addSection()">+</button>' +
 								'</div>'
 			case "hr":
 				return  '<div style="position: relative">' +
 								'<hr ng-style="doc.style">' +
+								'<div class="sort-handle" ng-show="container.allowEdit">M</div>' +
 								'<button class="section-delete" ng-show="container.allowEdit" ng-click="deleteSection()">&times;</button>' +
 								'</div>'
 			case "container-list":
@@ -401,6 +403,7 @@ function MainCtrl($scope, $element, $http, focus, $compile){
 									'<li ng-repeat="item in doc.data" ng-class="{localFocus:local_focus}" ng-click= "getFocus()" ng-controller="SectionController">' +
 										'<div section></div>' +
 									'</li>' + 
+									'<div class="sort-handle" ng-show="parentContainer.allowEdit&&!isRootSection">M</div>' +
 									'<button class="section-delete" ng-show="container.allowEdit&&!isRootSection" ng-click="deleteSection()">&times;</button>' + 
 									'<button ng-show="container.allowEdit" ng-click="addSection()">+</button>' +
 								'</ul>'
@@ -423,7 +426,7 @@ function MainCtrl($scope, $element, $http, focus, $compile){
 }
 
 function SectionController($scope, $element, focus, $rootScope){
-	
+	$scope.parentContainer = $scope.container
 	$scope.parentDoc = $scope.doc
 	$scope.doc = $scope.doc.data[$scope.$index]
 	// $scope.local_css = []
