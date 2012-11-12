@@ -325,6 +325,7 @@ function MainCtrl($scope, $element, $http, focus, $compile){
 		"css" : [],
 		"allowEdit" : false
 	}
+
 	$scope.isRootSection = true
 
 	$scope.toggleEdit = function(){
@@ -369,8 +370,9 @@ function MainCtrl($scope, $element, $http, focus, $compile){
 				return 	'' +
 								// '<div ng-class="{localFocus:local_focus}" ng-click="getFocus()">' +
 								'<div style="position: relative">' +
-								'<div style="position: relative" class="{{styleClass()}}" ng-style="doc.style" ng-hide="container.allowEdit">{{doc.data}}</div>' +
-								'<input type="text" style="position: relative" class="{{styleClass()}}" ng-style="doc.style" ng-model="doc.data" ng-show="container.allowEdit">' +
+								// '<div style="position: relative" class="{{styleClass()}}" ng-style="doc.style" ng-hide="container.allowEdit">{{doc.data}}</div>' +
+								'<div contenteditable style="position: relative" class="{{styleClass()}}" ng-style="doc.style" ng-model="doc.data"></div>' +
+								'<div class="sort-handle" ng-show="container.allowEdit">M</div>' +
 								'<button class="section-delete" ng-show="container.allowEdit" ng-click="deleteSection()">&times;</button>' +
 								'</div>'
 			case "text-constant":

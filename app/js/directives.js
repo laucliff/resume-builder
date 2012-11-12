@@ -99,7 +99,7 @@ angular.module('rbDirectives',[])
         var onStart, onUpdate, opts, _start, _update
 
         // opts = angular.extend({}, scope.$eval(attrs["sortable"]))
-        opts = {}
+        opts = {handle: ".sort-handle"}
 
         if (!ngModel) return
 
