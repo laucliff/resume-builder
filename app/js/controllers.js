@@ -66,41 +66,108 @@ function MainCtrl($scope, $element, $http, focus, $compile){
 		]
 	}
 
-
-	experienceIteration = {
+	educationIteration = {
 		type: "container",
 		style:{
-			border: "1px solid black"
+			// border: "1px solid black"
 		},
 		data: [
 			{
 				type: "text",
 				styleClass: ["section-title"],
+				style:{},
+				data: "Education Title"
+			},
+			{
+				type: "text",
+				style:{},
+				data: "Education Description"
+			},
+			{
+				type: "container-list",
+				styleClass: ["section-detail"],
+				style:{},
+				data: [
+					{
+						type: "text",
+						styleClass: ["section-detail"],
+						style:{},
+						data: "Detail goes here..."
+					}
+				],
+				iteration: {
+					type: "text",
+					styleClass: ["section-detail"],
+					style:{},
+					data: "Detail goes here..."
+				}
+			}
+		]
+	}
+
+	education = {
+		type: "container",
+		style:{},
+		data: [
+			{
+				type: "text",
+				styleClass: ["section-header"],
+				style: {},
+				data: "Education"
+			}
+		],
+		iteration: educationIteration
+	}
+
+	experienceIteration = {
+		type: "container",
+		style:{
+			// border: "1px solid black"
+		},
+		data: [
+			{
+				type: "text",
+				styleClass: ["section-title"],
+				style:{},
 				data: "Experience Title"
 			},
 			{
 				type: "text",
+				style:{},
+				data: "Experience Description"
+			},
+			{
+				type: "container-list",
 				styleClass: ["section-detail"],
-				data: "Description goes here..."
+				style:{},
+				data: [
+					{
+						type: "text",
+						styleClass: ["section-detail"],
+						style:{},
+						data: "Detail goes here..."
+					}
+				],
+				iteration: {
+					type: "text",
+					styleClass: ["section-detail"],
+					style:{},
+					data: "Detail goes here..."
+				}
 			}
-		],
-		iteration: {
-			type: "text",
-			styleClass: ["section-detail"],
-			style:{},
-			data: "Description goes here..."
-		}
+		]
 	}
 
 	experience = {
 		type: "container",
 		style:{
-			border: "1px solid black"
+			// border: "1px solid black"
 		},
 		data: [
 			{
 				type: "text",
 				styleClass: ["section-header"],
+				style: {},
 				data: "Experiences"
 			}
 		],
@@ -120,6 +187,7 @@ function MainCtrl($scope, $element, $http, focus, $compile){
 			{
 				type: 'hr'
 			},
+			education,
 			experience,
 			// {
 			// 	style: {
@@ -383,13 +451,14 @@ function StyleController($scope, $element, focus, styleService){
 	]
 
 	$scope.fonts = ["Arial", "Courier", "Times New Roman"]
+	$scope.alignments = ["left", "center", "right"]
+	$scope.borderStyles = ["dotted", "dashed", "solid", "double"]
 
 	$scope.styleSet = [
 		{
 			name: "width",
 			ui: "slider",
-			suffix: "%",
-			params: {}
+			suffix: "%"
 		},{
 			name: "height",
 			ui: "slider",
@@ -398,13 +467,11 @@ function StyleController($scope, $element, focus, styleService){
 		},{
 			name: "padding-left",
 			ui: "slider",
-			suffix: "%",
-			params: {}
+			suffix: "%"
 		},{
 			name: "padding-top",
 			ui: "slider",
-			suffix: "%",
-			params: {}
+			suffix: "%"
 		},{
 			name: "font-size",
 			ui: "slider",
@@ -413,7 +480,20 @@ function StyleController($scope, $element, focus, styleService){
 		},{
 			name: "font-family",
 			ui: "select",
-			params: {}
+			collection: 'fonts',
+		},{
+			name: "text-align",
+			ui: "select",
+			collection: 'alignments',
+		},{
+			name: "border-width",
+			ui: "slider",
+			suffix: "px",
+			params: {min: 0, max:10}
+		},{
+			name: "border-style",
+			ui: "select",
+			collection: 'borderStyles',
 		}
 	]
 
@@ -422,12 +502,13 @@ function StyleController($scope, $element, focus, styleService){
 	$scope.template = function(opts){
 
 		var model = 'currentFocus.style[&quot;' + opts.name + '&quot;]'
+		var params = angular.isUndefined(opts.params) ? '{}' : JSON.stringify(opts.params).replace(/"/g,"&quot;")
 
 		switch(opts.ui){
 			case "slider":
-				return '<div slider="'+ JSON.stringify(opts.params).replace(/"/g,"&quot;") +'" ng-model="' + model +'" suffix="' + opts.suffix +'"></div>'
+				return '<div slider="'+ params +'" ng-model="' + model +'" suffix="' + opts.suffix +'"></div>'
 			case "select":
-				return '<select ng-model="'+ model +'" ng-options="font for font in fonts">'
+				return '<select ng-model="'+ model +'"ng-options="option for option in '+ opts.collection +'">'
 		}
 	}
 
