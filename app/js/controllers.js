@@ -217,62 +217,62 @@ function MainCtrl($scope, $element, $http, focus, $compile){
 			// 	type: 'text'
 			// }
 			// ,
-			{
-				type: 'container-columns',
-				style: {
-					'background-color': 'white',
-					'position': 'relative'
-					// 'padding-left': '100px'
-				},
-				data:[ 
-									{
-				type: 'container',
-				style: {
-					'background-color': 'white',
-					'position': 'relative'
-				},
-				data:[ 
-						{
-							style: {
-								'background-color': 'orangered'
-							},
-							data: '7',
-							type: 'textarea'
-						},
-						{
-							style: {
-								'background-color': 'salmon'
-							},
-							data: '8',
-							type: 'text'
-						}
-					]
-			},
-									{
-				type: 'container',
-				style: {
-					'background-color': 'white',
-					'position': 'relative'
-				},
-				data:[ 
-						{
-							style: {
-								'background-color': 'orangered'
-							},
-							data: '8',
-							type: 'textarea'
-						},
-						{
-							style: {
-								'background-color': 'salmon'
-							},
-							data: '9',
-							type: 'text'
-						}
-					]
-			}
-					]
-			}
+			// {
+			// 	type: 'container-columns',
+			// 	style: {
+			// 		'background-color': 'white',
+			// 		'position': 'relative'
+			// 		// 'padding-left': '100px'
+			// 	},
+			// 	data:[ 
+			// 						{
+			// 	type: 'container',
+			// 	style: {
+			// 		'background-color': 'white',
+			// 		'position': 'relative'
+			// 	},
+			// 	data:[ 
+			// 			{
+			// 				style: {
+			// 					'background-color': 'orangered'
+			// 				},
+			// 				data: '7',
+			// 				type: 'textarea'
+			// 			},
+			// 			{
+			// 				style: {
+			// 					'background-color': 'salmon'
+			// 				},
+			// 				data: '8',
+			// 				type: 'text'
+			// 			}
+			// 		]
+			// },
+			// 						{
+			// 	type: 'container',
+			// 	style: {
+			// 		'background-color': 'white',
+			// 		'position': 'relative'
+			// 	},
+			// 	data:[ 
+			// 			{
+			// 				style: {
+			// 					'background-color': 'orangered'
+			// 				},
+			// 				data: '8',
+			// 				type: 'textarea'
+			// 			},
+			// 			{
+			// 				style: {
+			// 					'background-color': 'salmon'
+			// 				},
+			// 				data: '9',
+			// 				type: 'text'
+			// 			}
+			// 		]
+			// }
+			// 		]
+			// }
 		]
 
 	}
@@ -388,6 +388,7 @@ function MainCtrl($scope, $element, $http, focus, $compile){
 									// '{{styleClass()}}<hr>' +
 										'<div section></div>' +
 									'</div>' + 
+									'<div ng-show="doc.data.length==0">(Empty Container)</div>' +
 									'<div class="sort-handle" ng-show="parentContainer.allowEdit&&!isRootSection">M</div>' +
 									'<button class="section-delete" ng-show="container.allowEdit&&!isRootSection" ng-click="deleteSection()">&times;</button>' + 
 									'<button ng-show="container.allowEdit" ng-click="addSection()">+</button>' +
@@ -403,6 +404,7 @@ function MainCtrl($scope, $element, $http, focus, $compile){
 									'<li ng-repeat="item in doc.data" ng-class="{localFocus:local_focus}" ng-click= "getFocus()" ng-controller="SectionController">' +
 										'<div section></div>' +
 									'</li>' + 
+									'<div ng-show="doc.data.length==0">(Empty Container)</div>' +
 									'<div class="sort-handle" ng-show="parentContainer.allowEdit&&!isRootSection">M</div>' +
 									'<button class="section-delete" ng-show="container.allowEdit&&!isRootSection" ng-click="deleteSection()">&times;</button>' + 
 									'<button ng-show="container.allowEdit" ng-click="addSection()">+</button>' +
