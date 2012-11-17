@@ -14,7 +14,6 @@
 		}
 	</style>
 	<!-- <link rel="stylesheet" href="css/bootstrap-responsive.min.css"> -->
-	<link rel="stylesheet" href="css/main.css">
 
 	<!-- <script src="js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script> -->
 	
@@ -23,6 +22,9 @@
 	<link rel="stylesheet" href="css/smoothness/jquery-ui-1.9.0.css">
 	<script src="js/vendor/jquery-1.8.2.min.js"></script>
 	<script src="js/vendor/jquery-ui-1.9.0.js"></script>
+
+	<link rel="stylesheet" href="css/main.css">
+
 
 	<!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
   <!-- // <script src="js/vendor/bootstrap.js"></script> -->
@@ -50,8 +52,9 @@
 {{testval}}
 <div contenteditable ng-model="testval"></div>
 <hr>
+<div ng-class="{'page-solo':basicMode, 'page-with-style':!basicMode}">
 <div section></div>
-
+</div>
 
 <!-- 	<div ui:sortable ng-model="doc.data" ng-style="doc.style">
 	<div ng-repeat="item in doc.data" ng-style="item.style" ng-controller="SectionController">
@@ -62,16 +65,19 @@
 
 </div>
 
-<div class="stylebox" stylebox ng-controller="StyleController">
-	<!-- {{style}}<hr> -->{{currentFocus.style}}
+<div class="stylebox" ng-class="{'stylebox-inactive':basicMode, 'stylebox-active':!basicMode}" stylebox ng-controller="StyleController">
+	<!-- {{style}}<hr> -->
+	<!-- {{currentFocus.style}} -->
 <!-- 	<div ng-repeat="attr in styleAttrs">
 		{{attr}}:<input type="text" ng-model="currentFocus.style[attr]">
 	</div> -->
 
-	<div ng-repeat="style in styleSet">
-		{{style.name}}: {{currentFocus.style[style.name]}}<div style-widget="style">{{style}}</div>
+	<div class="stylebox-handle">||</div>
+	<div class="stylebox-widget-container">
+	<div ng-repeat="style in styleSet" ng-class-even="'style-widget-even'" ng-class-odd="'style-widget-odd'" class="style-widget">
+		{{style.name}}: {{currentFocus.style[style.name]}}<div style-widget="style"></div>
 	</div>
-
+	</div>
 	<!-- <button ng-click="addStyle()">+</button> -->
 </div>
 

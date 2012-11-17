@@ -28,10 +28,14 @@ body{
 	padding: 10px;
 }*/
 
-.page{
-	padding: 1in;
-	/*padding-left: 1in;*/
-	/*padding-right: 1in;*/
+
+
+.page-with-stylebox{
+	margin-left: 50px;
+}
+
+.page-solo{
+	margin: auto;
 }
 
 .sectionContainer{
@@ -60,11 +64,59 @@ body{
 }
 
 .stylebox{
-	background-color: gray;
+	/*background-color: gray;*/
 	position: fixed;
-	width: 5in;
-	top: 10px;
-	right: 20px;
+	/*width: 480px;*/
+	top: 10%;
+	right: 10px;
+}
+
+.stylebox-inactive{
+	/*right: -445px;*/
+}
+
+.stylebox-active{
+	right: 0px;
+}
+
+.stylebox-handle{
+	background-color: #A9A9A9;
+	float: left;
+	width: 30px;
+	height: 50px;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-bottom: 2px;
+	text-align: center;
+}
+
+.stylebox-widget-container{
+	float: left;
+	width: 450px;
+}
+
+.style-widget{
+	background-color: gray;
+	width: 100%;
+	margin: auto;
+	padding: 5px;
+}
+
+.style-widget-even{
+	/*background-color: gray;*/
+}
+
+.style-widget-odd{
+	/*background-color: gray;*/
+}
+
+.ui-slider .ui-slider-handle{
+	border: 0px;
+	top: 0px;
+	margin-left: 0px;
+	height: 100%;
+	width: 1em;
+	background: black;
 }
 
 /*classes for section text*/

@@ -180,7 +180,8 @@ function MainCtrl($scope, $element, $http, focus, $compile){
 			'background-color': 'lightgray',
 			'border' : '1px solid black',
 			'width' : '8.5in',
-			'min-height' : '11in'
+			'min-height' : '11in',
+			'padding' : '1in'
 			},
 		data: [
 			resumeIntro,
@@ -327,6 +328,7 @@ function MainCtrl($scope, $element, $http, focus, $compile){
 	}
 
 	$scope.isRootSection = true
+	$scope.basicMode = true
 
 	$scope.toggleEdit = function(){
 			this.container.allowEdit = !this.container.allowEdit
@@ -483,7 +485,7 @@ function StyleController($scope, $element, focus, styleService){
 			name: "font-size",
 			ui: "slider",
 			suffix: "pt",
-			params: {min: 5, max:50}
+			params: {min: 10, max:30}
 		},{
 			name: "font-family",
 			ui: "select",
