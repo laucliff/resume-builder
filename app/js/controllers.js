@@ -328,10 +328,15 @@ function MainCtrl($scope, $element, $http, focus, $compile){
 	}
 
 	$scope.isRootSection = true
-	$scope.basicMode = true
+	$scope.showStyleBox = false
+
 
 	$scope.toggleEdit = function(){
 			this.container.allowEdit = !this.container.allowEdit
+	}
+
+	$scope.toggleStyleBox = function(){
+		$scope.showStyleBox = !this.showStyleBox
 	}
 
 	$scope.getFocus = function(){
@@ -531,5 +536,6 @@ function StyleController($scope, $element, focus, styleService){
 		// _.extend($scope.currentFocus.style, newStyle)
 		styleService.addStyle(newStyle)
 	}
+
 
 }

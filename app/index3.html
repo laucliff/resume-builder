@@ -49,11 +49,9 @@
 
 		{{doc}}
 <hr>
-{{testval}}
-<div contenteditable ng-model="testval"></div>
-<hr>
-<div ng-class="{'page-solo':basicMode, 'page-with-style':!basicMode}">
-<div section></div>
+
+<div ng-class="{'page-without-stylebox':!showStyleBox, 'page-with-stylebox':showStyleBox}">
+	<div section></div>
 </div>
 
 <!-- 	<div ui:sortable ng-model="doc.data" ng-style="doc.style">
@@ -65,14 +63,14 @@
 
 </div>
 
-<div class="stylebox" ng-class="{'stylebox-inactive':basicMode, 'stylebox-active':!basicMode}" stylebox ng-controller="StyleController">
+<div class="stylebox" ng-class="{'stylebox-inactive':!showStyleBox, 'stylebox-active':showStyleBox}" stylebox ng-controller="StyleController">
 	<!-- {{style}}<hr> -->
 	<!-- {{currentFocus.style}} -->
 <!-- 	<div ng-repeat="attr in styleAttrs">
 		{{attr}}:<input type="text" ng-model="currentFocus.style[attr]">
 	</div> -->
 
-	<div class="stylebox-handle">||</div>
+	<div class="stylebox-handle" ng-click="toggleStyleBox()">||</div>
 	<div class="stylebox-widget-container">
 	<div ng-repeat="style in styleSet" ng-class-even="'style-widget-even'" ng-class-odd="'style-widget-odd'" class="style-widget">
 		{{style.name}}: {{currentFocus.style[style.name]}}<div style-widget="style"></div>
