@@ -1,0 +1,316 @@
+{
+   "type":"container",
+   "style":{
+      "background-color":"lightgray",
+      "border":"1px solid black",
+      "width":"8.5in",
+      "min-height":"11in",
+      "padding":"1in"
+   },
+   "data":[
+      {
+         "type":"container",
+         "style":{
+            "border":"1px solid black"
+         },
+         "data":[
+            {
+               "type":"text",
+               "style":{
+                  "text-align":"center",
+                  "font-family":"Arial",
+                  "font-size":"24pt"
+               },
+               "data":"Lorem \nIpsum"
+            },
+            {
+               "type":"text",
+               "style":{
+                  "text-align":"center",
+                  "font-size":"10pt"
+               },
+               "data":"email@email.com"
+            },
+            {
+               "type":"text",
+               "style":{
+                  "text-align":"center",
+                  "font-size":"10pt"
+               },
+               "data":"(123) 456-7890"
+            },
+            {
+               "type":"text",
+               "style":{
+                  "text-align":"center",
+                  "font-size":"10pt"
+               },
+               "data":"21 Jump St"
+            }
+         ]
+      },
+      {
+         "type":"hr"
+      },
+      {
+         "type":"container",
+         "style":{
+
+         },
+         "data":[
+            {
+               "type":"text",
+               "styleClass":[
+                  "section-header"
+               ],
+               "style":{
+
+               },
+               "data":"Education"
+            },
+            {
+               "type":"container",
+               "style":{
+
+               },
+               "data":[
+                  {
+                     "type":"text",
+                     "styleClass":[
+                        "section-title"
+                     ],
+                     "style":{
+
+                     },
+                     "data":"Education Title"
+                  },
+                  {
+                     "type":"text",
+                     "style":{
+
+                     },
+                     "data":"Education Description"
+                  },
+                  {
+                     "type":"container-list",
+                     "styleClass":[
+                        "section-detail"
+                     ],
+                     "style":{
+
+                     },
+                     "data":[
+                        {
+                           "type":"text",
+                           "styleClass":[
+                              "section-detail"
+                           ],
+                           "style":{
+
+                           },
+                           "data":"Detail goes here..."
+                        }
+                     ],
+                     "iteration":{
+                        "type":"text",
+                        "styleClass":[
+                           "section-detail"
+                        ],
+                        "style":{
+
+                        },
+                        "data":"Detail goes here..."
+                     }
+                  }
+               ]
+            }
+         ],
+         "iteration":{
+            "type":"container",
+            "style":{
+
+            },
+            "data":[
+               {
+                  "type":"text",
+                  "styleClass":[
+                     "section-title"
+                  ],
+                  "style":{
+
+                  },
+                  "data":"Education Title"
+               },
+               {
+                  "type":"text",
+                  "style":{
+
+                  },
+                  "data":"Education Description"
+               },
+               {
+                  "type":"container-list",
+                  "styleClass":[
+                     "section-detail"
+                  ],
+                  "style":{
+
+                  },
+                  "data":[
+                     {
+                        "type":"text",
+                        "styleClass":[
+                           "section-detail"
+                        ],
+                        "style":{
+
+                        },
+                        "data":"Detail goes here..."
+                     }
+                  ],
+                  "iteration":{
+                     "type":"text",
+                     "styleClass":[
+                        "section-detail"
+                     ],
+                     "style":{
+
+                     },
+                     "data":"Detail goes here..."
+                  }
+               }
+            ]
+         }
+      },
+      {
+         "type":"container",
+         "style":{
+
+         },
+         "data":[
+            {
+               "type":"text",
+               "styleClass":[
+                  "section-header"
+               ],
+               "style":{
+
+               },
+               "data":"Experiences"
+            },
+            {
+               "type":"container",
+               "style":{
+
+               },
+               "data":[
+                  {
+                     "type":"text",
+                     "styleClass":[
+                        "section-title"
+                     ],
+                     "style":{
+
+                     },
+                     "data":"Experience Title"
+                  },
+                  {
+                     "type":"text",
+                     "style":{
+
+                     },
+                     "data":"Experience Description"
+                  },
+                  {
+                     "type":"container-list",
+                     "styleClass":[
+                        "section-detail"
+                     ],
+                     "style":{
+
+                     },
+                     "data":[
+                        {
+                           "type":"text",
+                           "styleClass":[
+                              "section-detail"
+                           ],
+                           "style":{
+
+                           },
+                           "data":"Detail goes here..."
+                        }
+                     ],
+                     "iteration":{
+                        "type":"text",
+                        "styleClass":[
+                           "section-detail"
+                        ],
+                        "style":{
+
+                        },
+                        "data":"Detail goes here..."
+                     }
+                  }
+               ]
+            }
+         ],
+         "iteration":{
+            "type":"container",
+            "style":{
+
+            },
+            "data":[
+               {
+                  "type":"text",
+                  "styleClass":[
+                     "section-title"
+                  ],
+                  "style":{
+
+                  },
+                  "data":"Experience Title"
+               },
+               {
+                  "type":"text",
+                  "style":{
+
+                  },
+                  "data":"Experience Description"
+               },
+               {
+                  "type":"container-list",
+                  "styleClass":[
+                     "section-detail"
+                  ],
+                  "style":{
+
+                  },
+                  "data":[
+                     {
+                        "type":"text",
+                        "styleClass":[
+                           "section-detail"
+                        ],
+                        "style":{
+
+                        },
+                        "data":"Detail goes here..."
+                     }
+                  ],
+                  "iteration":{
+                     "type":"text",
+                     "styleClass":[
+                        "section-detail"
+                     ],
+                     "style":{
+
+                     },
+                     "data":"Detail goes here..."
+                  }
+               }
+            ]
+         }
+      }
+   ]
+}
